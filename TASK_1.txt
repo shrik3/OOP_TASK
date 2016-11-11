@@ -1,0 +1,124 @@
+第1次上机题目分为两部分：
+	•	（必做）P140:   3  ,  16  ,  17
+	•	（选做）实现本章的桌面计算器.
+下面针对必做的三道题，给出我对题目要求的理解和实现时的要点。
+§6.6习题3
+Read a sequence of possibly whitespace-separated (name,value) pairs, where the name is a single whitespace-separated word and the value is an integer or a floating-point value. Compute and print the sum and mean for each name and the sum and mean for all names. Hint: §6.1.8.
+要求分析：
+	本题的输入是一系列 name 和 value 构成的值对，其中name是中间没有空白字符的单词（文本），value是算术数值。整个输入中的name可以重复出现。【注：输入中任意两个数据项之间用（至少1个）空白字符分隔】
+	在反复读取输入过程中只需要记住相关输入（或其某些信息），当遇到输入结束时：
+	•	对于每个不同的name，计算该name在输入中对应的所有value的总和、平均数；
+	•	计算所有name对应的value的总和、平均数。
+如，输入以下数据(自己决定是否用括弧包围一个值对，本示例中未采用)：
+	Xi  60	wei  50	.2a
+	Jin	100	wei	  40.5  wei   1.1  Jin 200.0
+[此时输入 ^z 即可结束输入]
+程序的输出应该为（无需按顺序，输出格式无统一要求，但要清晰）：
+小计：
+	Xi  总和=60， 平均数=60
+	Jin 总和=300，平均数=150
+	wei 总和=91.8，平均数=30.6
+总计：a
+总和=451.8， 平均数=75.3
+
+实现要点：
+要点1：无论输入的是整数形式还是实数形式，可统一按实数处理。
+要点2：当使用C++ 提供的cin 对象来读取输入时，如何判断输入结束了？
+	实现此功能的方式不唯一，下面示例中给出一种简单方法，其他用法可自行查阅其他资料。
+要点3：关于输入数据的存储方式不限，只要能满足要求即可。
+鉴于本题要求按name统计，所以对于一个特定name对应的所有数值、出现次数等相关信息，比较方便的手段就是直接利用C++  STL 中提供的map（映射表，一对一的关联关系表）、或multimap（多对多的关联关系表）来存储，请大家自行查阅(baidu)相关资料学习它们。
+下面结合本题要求，给出使用map的基本用法和代码框架如下。其中myDictionary 可理解为一个集合，其每个元素就是name和其信息（类型自定义，如下面的wordInfo）构成的值对。每个元素以 name 为关键字进行唯一标识，并可在该集合中查找、获取、修改name对应的信息。
+			#include <string>
+			#include <map>
+			using namespace std;
+			…
+			// 下面这个类型定义了某个特定 name 的信息
+			struct wordInfo { int count;  // 特定name在输入中的出现次数
+			double  sum;  //同一name在输入中所有出现对应的数值总和
+				//构造函数，初始化新的 wordInfo 的变量(这个知识在第10章学习)
+			    wordInfo() { count=0; sum=0; }
+			};
+			typedef map<string,  wordInfo> dict_type;
+			dict_type myDictionary;  //用于登记每个name及其信息
+			string name;  double value;
+
+			// 循环读取输入的 name和value，并登记到 myDictionary中
+			// 提醒：循环体可定义为一个函数
+			while( 1 ) {
+			    cin >> name;  if( cin ) break; // 输入 Ctrl+Z 即可退出循环
+			    cin >> value;  if( cin ) break; // 输入 Ctrl+Z 即可退出循环
+
+			    // 使用操作符 [] 来获得 name 的信息之引用.若该名字不在myDictionary中，
+			// 则会自动添加一个新的值对 <string, wordInfo>，其中信息的初值由
+		    	// 类型 wordInfo的构造函数负责。
+				wordInfo&  currInfo=myDictionary[name];
+			 	if( currInfo.count == 0 )  // name 第1次出现
+				    { currInfo.count=1;   currInfo.sum = value; }
+				else   // name 第2,3,…,N次出现
+				    { currInfo.count +=1;   currInfo.sum += value; }
+			} // end of while(1)
+
+			// 下面这个循环示例: 使用”迭代器”遍历myDiction，以访问其中每个
+			// 元素的 key 和 value。这里仅输出每个名字和其出现次数
+			for(dict_type::iterator it=myDictionary.begin(); it != myDictionary.end(); ++it)
+			{	cout << “name ” << it->first << “:”<<it->second.count << endl; }
+
+使用map时，应注意和思考的一个重要问题是：当在该集合新增一个元素时，如何确保该新元素的初始值是确定的、正确的，而不是随机的。如上面用了第十章将介绍的 class的constructor（构造函数）来负责初始化。
+关于map更详细的用法请自行搜索其他资料。
+
+§6.6习题16
+Write a function atoi(const char*) that takes a string containing digits and returns the corresponding int. For example, atoi("123") is 123. Modify atoi() to handle C++ octal and hexadecimal notation in addition to plain decimal numbers. Modify atoi() to handle the C++ character constant notation.
+
+要求分析：
+	要求编制函数
+int atoi(const char*);
+	该函数对任一表示整数的字符串参数进行扫描，并将其转换为对应整数，如字符串“91”表示十进制整数91，通过调用
+		int n = atoi(“91”)，
+即可用变量n存储该函数返回的整数91.
+	本题要求实现该函数时，字符串的书写形式应支持(请参见第4章课件、教材)：
+	•	C/C++语言认可的十进制整数字面量，如”91”, “+123”, “-456”等，它们表示的十进制整数依次为91，123， -456；
+	•	C/C++语言认可的八进制整数字面量（正负号之后以0打头），如”0”，“012”，“-0456” 等，它们表示的十进制整数依次为0，10， -302；
+	•	C/C++语言认可的十六进制整数字面量（正负号之后以0x或0X打头），如”0x12”，“+0XfE”，“-0x456” 等，它们表示的十进制整数依次为18， 254， -1110；
+	•	最后一句中，“handle the C++ character constant notation”，要求上述各类字符串中的每个字符，都可以采用 C++ 中字符字面量的书写形式，如“012”中的字符‘1’也可以写成十六进制形式‘\x31’(共四个字符) 或八进制形式‘\061’（共四个字符），这样“012”、“0\x312”、“0\0612”都表示十进制整数10。
+
+实现要点：
+要点1：对于上述4类书写形式，可逐条、分步骤实现；
+要点2：转换的基本策略有两种（忽略正负号、输入正确时）：
+	•	从左到右地扫描字符串，边扫描边计算/转换。如对于“123”，
+	•	先扫描到字符‘1’，将其转换为整数 n=1；
+	•	再扫描到字符‘2’，将其转换为2，并令 n=n*10+2=12；
+	•	再扫描到字符‘3’，将其转换为3，并令 n=n*10+3=123。
+	•	从右到左地扫描字符串，边扫描边计算/转换。如对于“123”，
+	•	先找到字符串末尾，然后向左扫描；
+	•	先看到字符‘3’，将其转换为整数 n=3；
+	•	再扫描到‘2’，将其转换为2，并令 n=2*10+n=23；
+	•	再扫描到‘1’，将其转换为1，并令 n=1*100+n=123。
+	•	既可通过指针扫描字符串，也可通过数组下标扫描字符串。
+
+要点3：由于字符串来自 atoi() 函数的外部（调用者），所以字符串有可能存在错误。所以
+	•	先考虑完全正确的字符串，再考虑错误的字符串。后者如“12.3E-10”应转换为十进制整数12，“1a”应转换为十进制整数1，“x123”应转换为整数0等等。
+	•	你也可以传递任意字符串，并将你的转换结果和标准C的库函数 atoi() 的结果进行对比（该库函数仅允许字符串采用10进制表示法）。此时需要避免你的 atoi 和标准库的函数同名。
+要点4：应注意区分函数的返回值、用cout、printf 产生的输出这两个不同概念。
+§6.6习题17
+Write a function itoa(int i, char b[]) that creates a string representation of i in b and returns b.
+要求分析：
+	要求编制函数
+char* itoa(int i, char b[]);
+该函数将指定的整数i转换为字符串（这一过程实际上是 atoi()的逆过程，常被称作字符串化、序列化），并将字符串存储到参数b指定的字符数组中。注意：要求函数最后应返回参数--数组b，在C/C++返回数组则意味者返回的是数组第一个元素的地址（即数组首地址），所以该函数的返回值类型应该是“char*”，而不是char[]。如
+	int n = -123;  char str[10];
+	itoa(n, str); //即可通过 str数组得到字符串“-123”。
+	itoa(n=45, str); //即可通过 str数组得到字符串“45”或“+45”。
+
+注意事项：参数 b 对应的实参数组的容量应足够大，否则无法容纳较长的整数字符串。具体容量可参考 int 类型的最大值、最小值。
+
+实现要点：
+要点1：先判断整数i的正负，然后再将其绝对值转换为字符串。
+要点2：可用具有‘栈’性质的数组存储中间结果，当然也可采用其他方式。
+要点3：将你的转换结果和C的非标准库函数 itoa() 的结果进行对比（需要百度一下）。
+此时需要避免你的 itoa() 和该非标准函数同名。
+可选的扩展功能：
+软件开发实践中，对整数进行序列化时，可将整数（按需要）转换为十进制字符串、或八进制、或十六进制、或二进制字符串。如-123按十进制转换时得到字符串“-123”，按八进制转换时得到字符串“-0173”（注意用0打头），按十六进制转换时得到字符串“-0x7B”（注意用0x或0X打头）。【为支持多种进制，可为该函数增加一个表示进制的参数】
+重要提示：
+C语言的标准库函数 printf()、sprintf() 等以printf结尾的函数支持将整数按8、10、16进制打印，但当采用8/16进制输出时，将整数统一看作“unsigned”，且不产生必要的前缀（8进制的’0’、16进制的‘0X’）。
+非标准的库函数 itoa() 也支持按指定进制转换为字符串，当采用8/16进制输出时，和 *printf() 存在类似现象。
+=========================  T H E    E N D  =========================
