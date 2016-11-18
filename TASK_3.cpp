@@ -20,7 +20,7 @@ char* itoa(int i,char b[]){
     }
     for(int i =0;i<j;i++){
         b[i] = c[j-i-1];
-    }
+    } 
     return b;
 }
 
