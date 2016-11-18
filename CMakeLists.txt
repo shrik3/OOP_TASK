@@ -4,4 +4,4 @@ project(OOP)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 
-add_executable(OOP TASK_6.cpp)
+add_executable(OOP TASK_7.cpp)
