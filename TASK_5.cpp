@@ -63,6 +63,7 @@ int dictOrderPrint(Tnode *T){
     if(T){
         dictOrderPrint(T->left);
         cout << T->word<<" ";
+        cout << T->count << endl;
         dictOrderPrint(T->right);
     }
 

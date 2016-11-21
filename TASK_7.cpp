@@ -86,12 +86,20 @@ void IncreaseOneYear(date *d) {
 
 }
 
+void NextMon(date & d) {
+    int a = WhichWeekDay(d);
+    int inc = 8 - a;
+    for (int i = 0; i < inc; i++) {
+        IncreaseOneDay(&d);
+    }
+
+}
 
 int main() {
     date a;
     a.year = 2015;
-    a.month = 11;
-    a.day = 17;
+    a.month = 2;
+    a.day = 28;
     a.init();
     IncreaseOneDay(&a);
     cout << a.year << '/' << a.month << '/' << a.day << endl;
@@ -99,8 +107,10 @@ int main() {
     cout << a.year << '/' << a.month << '/' << a.day << endl;
     IncreaseOneYear(&a);
     cout << a.year << '/' << a.month << '/' << a.day << endl;
-
-    cout << WhichWeekDay(a);
+    cout << WhichWeekDay(a) << endl;
+    date b = a;
+    NextMon(b);
+    cout << b.year << '/' << b.month << '/' << b.day << endl;
     return 0;
 }
 
