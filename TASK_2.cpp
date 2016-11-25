@@ -42,7 +42,7 @@ double atoi(char *num) {
             }
             num[t]=c;
             for(int i=t+1;num[i+1]!='\0';i++){
-                num[t] = num[t+2];
+                num[t] = num[t+3];
             }
         }
 

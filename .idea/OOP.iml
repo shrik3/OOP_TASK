@@ -5,6 +5,15 @@
       <sourceFolder url="file://$MODULE_DIR$/TASK_3.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/TASK_5_modified.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/TASK_4.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CAL/lexer.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CAL/syms.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CAL/lexer.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CAL/parser.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CAL/calculator.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CAL/error.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CAL/syms.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CAL/parser.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CAL/error.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/TASK_5.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/TASK_1.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/TASK_6.cpp" isTestSource="false" />
@@ -16,16 +25,16 @@
     <orderEntry type="module-library">
       <library name="Header Search Paths">
         <CLASSES>
-          <root url="file://C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/5.1.0/include" />
-          <root url="file://C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/5.1.0/include-fixed" />
-          <root url="file://C:/TDM-GCC-64/x86_64-w64-mingw32/include" />
-          <root url="file://C:/TDM-GCC-64/include" />
+          <root url="file://C:/MinGW/include" />
+          <root url="file://C:/MinGW/mingw32/include" />
+          <root url="file://C:/MinGW/lib/gcc/mingw32/5.3.0/include" />
+          <root url="file://C:/MinGW/lib/gcc/mingw32/5.3.0/include-fixed" />
         </CLASSES>
         <SOURCES>
-          <root url="file://C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/5.1.0/include" />
-          <root url="file://C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/5.1.0/include-fixed" />
-          <root url="file://C:/TDM-GCC-64/x86_64-w64-mingw32/include" />
-          <root url="file://C:/TDM-GCC-64/include" />
+          <root url="file://C:/MinGW/include" />
+          <root url="file://C:/MinGW/mingw32/include" />
+          <root url="file://C:/MinGW/lib/gcc/mingw32/5.3.0/include" />
+          <root url="file://C:/MinGW/lib/gcc/mingw32/5.3.0/include-fixed" />
         </SOURCES>
       </library>
     </orderEntry>
