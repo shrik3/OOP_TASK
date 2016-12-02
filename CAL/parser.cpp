@@ -34,7 +34,7 @@ double prim(bool get) {
             return v;
         }
         case NAME: {
-            double v = table[string_value];
+            double &v = mtable[string_value];
             if (get_token() == ASSIGN) v = expr(true);
             return v;
         }

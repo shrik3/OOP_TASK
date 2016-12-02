@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-double error(string e);
+double error(const string& e);
 
 
 #endif //OOP_ERROR_H

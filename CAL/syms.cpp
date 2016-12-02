@@ -7,5 +7,6 @@
 Token_value curr_tok ;
 double number_value;
 string string_value;
-map<string,double> table;
+map<string,double> mtable;
 int no_of_errors;
+int curr_line=1;

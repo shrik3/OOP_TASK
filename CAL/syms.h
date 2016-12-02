@@ -13,21 +13,22 @@ enum Token_value {
     NAME,
     NUMBER,
     END,
-    PLUS='+',
-    MINUS='-',
-    MUL='*',
-    DIV='/',
-    PRINT=';',
-    ASSIGN='=',
-    LP='(',
-    RP=')'
+    PLUS = '+',
+    MINUS = '-',
+    MUL = '*',
+    DIV = '/',
+    PRINT = ';',
+    ASSIGN = '=',
+    LP = '(',
+    RP = ')'
 };
 
-extern Token_value curr_tok ;
+extern Token_value curr_tok;
 extern double number_value;
 extern string string_value;
-extern map<string,double> table;
+extern map<string, double> mtable;
 extern int no_of_errors;
+extern int curr_line;
 
 
 #endif //OOP_SYMS_H
