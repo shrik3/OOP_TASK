@@ -10,3 +10,4 @@ string string_value;
 map<string,double> mtable;
 int no_of_errors;
 int curr_line=1;
+int if_valid=1;

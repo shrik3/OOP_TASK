@@ -29,6 +29,7 @@ extern string string_value;
 extern map<string, double> mtable;
 extern int no_of_errors;
 extern int curr_line;
+extern int if_valid;
 
 
 #endif //OOP_SYMS_H

@@ -36,6 +36,7 @@ Token_value get_token() {
                 return curr_tok = NAME;
             }
             error("bad token");
+            if_valid = 0;
             return curr_tok = PRINT;
     }
 }

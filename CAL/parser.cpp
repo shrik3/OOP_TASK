@@ -42,11 +42,16 @@ double prim(bool get) {
             return -prim(true);
         case LP: {
             double e = expr(true);
-            if (curr_tok != RP) return error(") expected");
+            if (curr_tok != RP) {
+                if_valid = 0;
+                return error(") expected");
+            }
+
             get_token();
             return e;
         }
         default:
+            if_valid = 0;
             return error("primary expected");
     }
 }
@@ -63,7 +68,8 @@ double term(bool get) {
                     left /= d;
                     break;
                 }
-                return error("DIVIDE BY 0");
+                if_valid = 0;
+                return error("DIVIDED BY 0");
             default:
                 return left;
         }

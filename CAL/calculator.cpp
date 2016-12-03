@@ -28,7 +28,11 @@ int main(int argc, char* argv[]) {
         if(curr_tok == PRINT) {
             continue;
         }
-        cout << expr(false) << endl;
+        double result;
+        result = expr(false);
+        if(if_valid==1){
+            cout<<result<<endl;
+        }
         curr_line +=1;
 
     }
