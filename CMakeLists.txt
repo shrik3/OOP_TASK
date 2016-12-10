@@ -12,3 +12,6 @@ add_executable(OOP5_modified TASK_5_modified.cpp)
 add_executable(OOP6 TASK_6.cpp)
 add_executable(OOP7 TASK_7.cpp)
 add_executable(CAL CAL/calculator.cpp CAL/syms.h CAL/syms.cpp CAL/lexer.h CAL/lexer.cpp CAL/error.h CAL/error.cpp CAL/parser.h CAL/parser.cpp)
+add_executable(DAT DATE_CLASS/main.cpp DATE_CLASS/mdate.cpp )
+add_executable(TREE mTree/mTree.cpp mTree/main.cpp)
+
