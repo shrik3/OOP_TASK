@@ -10,6 +10,10 @@ int main(){
     A.day = 1;
     A.month = 10;
     A.year = 2016;
-    A.describe();
+
+    B.year = 1973;
+    B.month = 12;
+    B.day = 31;
+    cout << B.WhichDaySinceStd();
     return 0;
 }
